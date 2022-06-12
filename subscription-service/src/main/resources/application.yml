@@ -1,0 +1,19 @@
+server:
+  port: 8081
+spring:
+  application:
+    name: SUBSCRIPTION-SERVICE
+  jpa:
+    generate-ddl: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: update
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/subscriptiondb
+    username: root
+    password: Fall@4324
+    driver-class-name: com.mysql.jdbc.Driver

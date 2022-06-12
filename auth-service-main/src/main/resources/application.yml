@@ -1,0 +1,33 @@
+server:
+  port: 8001
+spring:
+  application:
+    name: AUTH-SERVICE
+  sql:
+    init:
+      mode: always
+  jpa:
+    generate-ddl: true
+    defer-datasource-initialization: true
+    properties:
+      hibernate:
+        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+    hibernate:
+      ddl-auto: create
+    show-sql: true
+  datasource:
+    url: jdbc:mysql://localhost:3306/userdb
+    username: root
+    password: Fall@4324
+    driver-class-name: com.mysql.cj.jdbc.Driver
+app:
+  jwtSecret: mailorderpharmacysecret
+logging:
+  level:
+    com:
+      cts:
+        authentication: debug
+
+
+
+

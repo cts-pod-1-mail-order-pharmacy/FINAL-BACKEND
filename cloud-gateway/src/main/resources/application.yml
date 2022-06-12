@@ -1,0 +1,28 @@
+server:
+  port: 9191
+
+jwt:
+  secret: secretkey
+
+spring:
+  application:
+    name: API-GATEWAY
+  cloud:
+    gateway:
+      routes:
+        - id: DRUGS-SERVICE
+          uri: lb://DRUGS-SERVICE
+          predicates:
+            - Path=/drugs/**
+        - id: SUBSCRIPTION-SERVICE
+          uri: lb://SUBSCRIPTION-SERVICE
+          predicates:
+            - Path=/subscription/**
+        - id: AUTH-SERVICE
+          uri: lb://AUTH-SERVICE
+          predicates:
+            - Path=/api/**
+        - id: REFILL-SERVICE
+          uri: lb://REFILL-SERVICE
+          predicates:
+            - Path=/refill/**
