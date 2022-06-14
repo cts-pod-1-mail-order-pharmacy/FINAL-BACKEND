@@ -1,4 +1,4 @@
-package com.cts.mailorderpharmacy.authservice;
+package com.cts.mailorderpharmacy.authservice.model;
 
 import com.cts.mailorderpharmacy.authservice.model.User;
 import org.junit.jupiter.api.Test;

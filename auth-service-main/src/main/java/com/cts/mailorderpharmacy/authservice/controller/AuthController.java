@@ -6,6 +6,7 @@ import com.cts.mailorderpharmacy.authservice.model.AuthResponse;
 import com.cts.mailorderpharmacy.authservice.model.JwtResponse;
 import com.cts.mailorderpharmacy.authservice.model.User;
 import com.cts.mailorderpharmacy.authservice.repository.UserRepository;
+import io.swagger.annotations.ApiOperation;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -29,6 +30,7 @@ public class AuthController {
     @Autowired
     private PasswordEncoder passwordEncoder;
 
+    @ApiOperation(value = "Verify the user credentials and generate JWT token", response = ResponseEntity.class)
     @PostMapping(value = "/login")
     public ResponseEntity<Object> login(@RequestBody User userlogincredentials) {
         //Generates token for login
@@ -45,6 +47,7 @@ public class AuthController {
         }
     }
 
+    @ApiOperation(value = "Create new user using the user credentials", response = ResponseEntity.class)
     @PostMapping(value = "/register")
     public ResponseEntity<Object> register(@RequestBody User user){
         String passwordEncoded = passwordEncoder.encode(user.getUpassword());
@@ -69,6 +72,7 @@ public class AuthController {
 //        }
 //    }
 
+    @ApiOperation(value = "Validate JWT Token", response = ResponseEntity.class)
     @GetMapping(value = "/validate")
     public ResponseEntity<Object> getValidity(@RequestHeader("Authorization") final String token) {
 
