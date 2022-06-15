@@ -1,0 +1,12 @@
+S3 Bucket Name - ij005-pod-1-mfpe
+S3 Bucket URL - https://s3.console.aws.amazon.com/s3/buckets/ij005-pod-1-mfpe-bucket?region=ap-south-1&tab=objects
+
+service-registry EC2 instance name - ij005-pod-1-service-registry
+service-registry EC2 instance id - i-05d4d3ad8e998237d
+service-registry EC2 instance url - https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#InstanceDetails:instanceId=i-05d4d3ad8e998237d
+
+Deployed service-registry url - http://ec2-54-214-223-155.us-west-2.compute.amazonaws.com:8761/
+
+cloud-gateway EC2 instance name - ij005-pod1-cloud-gateaway
+cloud-gateway EC2 instance id - i-0a90e9bfd3caa0a0c
+cloud-gateway EC2 isntance url - https://us-west-2.console.aws.amazon.com/ec2/v2/home?region=us-west-2#InstanceDetails:instanceId=i-0a90e9bfd3caa0a0c

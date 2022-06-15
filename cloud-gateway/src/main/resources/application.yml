@@ -19,10 +19,23 @@ spring:
           predicates:
             - Path=/subscription/**
         - id: AUTH-SERVICE
-          uri: lb://AUTH-SERVICE
+#          uri: lb://AUTH-SERVICE
+          uri: http://ec2-18-237-164-57.us-west-2.compute.amazonaws.com:8001/
           predicates:
             - Path=/api/**
         - id: REFILL-SERVICE
           uri: lb://REFILL-SERVICE
           predicates:
             - Path=/refill/**
+
+
+eureka:
+  instance:
+    preferIpAddress: true
+    ip-address: localhost
+  client:
+    prefer-same-zone-eureka: false
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://ec2-54-214-223-155.us-west-2.compute.amazonaws.com:8761/eureka

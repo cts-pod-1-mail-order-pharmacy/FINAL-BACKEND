@@ -1,25 +1,29 @@
 server:
   port: 8001
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
   application:
     name: AUTH-SERVICE
-  sql:
-    init:
-      mode: always
+#  sql:
+#    init:
+#      mode: always
   jpa:
     generate-ddl: true
-    defer-datasource-initialization: true
+#    defer-datasource-initialization: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.H2Dialect
     hibernate:
-      ddl-auto: create
+      ddl-auto: update
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/userdb
-    username: root
-    password: vedant
-    driver-class-name: com.mysql.cj.jdbc.Driver
+    url: jdbc:h2:mem:userdb
+#    username: root
+#    password: vedant
+    driver-class-name: org.h2.Driver
 app:
   jwtSecret: mailorderpharmacysecret
 logging:
@@ -28,6 +32,13 @@ logging:
       cts:
         authentication: debug
 
-
-
-
+eureka:
+  instance:
+    preferIpAddress: true
+    ip-address: localhost
+  client:
+    prefer-same-zone-eureka: false
+    register-with-eureka: true
+    fetch-registry: true
+    service-url:
+      defaultZone: http://ec2-54-214-223-155.us-west-2.compute.amazonaws.com:8761/eureka
