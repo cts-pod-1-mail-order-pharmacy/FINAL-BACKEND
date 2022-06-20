@@ -6,7 +6,7 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(url = "http://localhost:9191",name = "DRUGS-SERVICE")
+@FeignClient(url = "http://drugsservice.us-east-1.elasticbeanstalk.com",name = "drugs-service")
 public interface DrugsClient {
     @GetMapping("/drugs/getDispatchableDrugStock/{drugId}/{location}")
     public Drugs getDispatchableDrugStock(@PathVariable Long drugId, @PathVariable String location, @RequestHeader("Authorization") String token);

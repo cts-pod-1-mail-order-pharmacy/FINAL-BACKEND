@@ -35,7 +35,7 @@ public class DrugsTest {
 	    	Date date1=new SimpleDateFormat("dd/mm/yyyy").parse(Date1);
 	    	Date date2=new SimpleDateFormat("dd/mm/yyyy").parse(Date2);
 	    	
-	        drugs.setId(1);
+	        drugs.setId(1l);
 	        drugs.setName("xyz");
 	        drugs.setManufacturer("hat");
 	        drugs.setManufacturedDate(date1);

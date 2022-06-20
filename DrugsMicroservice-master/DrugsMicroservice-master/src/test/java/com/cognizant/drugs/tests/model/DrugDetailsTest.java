@@ -29,7 +29,7 @@ public class DrugDetailsTest {
 	    public void testAllGettersAndSetters() throws ParseException {
 		 drugD = new DrugDetails();
 	        
-	        drugD.setId(1);
+	        drugD.setId(1l);
 	        drugD.setLocation("xyz");
 	        drugD.setQuantity(20);
 	       

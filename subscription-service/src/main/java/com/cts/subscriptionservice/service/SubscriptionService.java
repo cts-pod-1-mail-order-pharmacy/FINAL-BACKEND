@@ -8,6 +8,7 @@ import com.cts.subscriptionservice.entity.MemberSubscription;
 import com.cts.subscriptionservice.entity.Prescription;
 import com.cts.subscriptionservice.repository.SubscriptionRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.stereotype.Service;
 import org.springframework.web.client.RestTemplate;
 
@@ -16,9 +17,6 @@ import java.util.*;
 
 @Service
 public class SubscriptionService {
-
-    @Autowired
-    private RestTemplate restTemplate;
 
     @Autowired
     private DrugsClient drugsClient;

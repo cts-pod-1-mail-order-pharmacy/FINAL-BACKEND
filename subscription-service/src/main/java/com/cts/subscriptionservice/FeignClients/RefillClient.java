@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestHeader;
 
-@FeignClient(name = "REFILL-SERVICE",url = "http://localhost:9191")
+@FeignClient(name = "refill-service",url = "http://refill.us-east-1.elasticbeanstalk.com")
 public interface RefillClient {
     @GetMapping("/refill/anyPendings/{subscription_id}")
     public boolean anyPendings(@PathVariable("subscription_id") Long subscriptionid, @RequestHeader("Authorization")String token);

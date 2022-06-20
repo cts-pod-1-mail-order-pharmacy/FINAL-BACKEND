@@ -1,18 +1,27 @@
 server:
-  port: 8085
+  port: 5000
 spring:
+  h2:
+    console:
+      enabled: true
+      path: /h2
   application:
     name: DRUGS-SERVICE
+  #  sql:
+  #    init:
+  #      mode: always
   jpa:
+    generate-ddl: true
+    #    defer-datasource-initialization: true
     properties:
       hibernate:
-        dialect: org.hibernate.dialect.MySQL5InnoDBDialect
+        dialect: org.hibernate.dialect.H2Dialect
     hibernate:
       ddl-auto: update
     show-sql: true
   datasource:
-    url: jdbc:mysql://localhost:3306/drugsdb
-    username: root
-    password: Fall@4324
-    driver-class-name: com.mysql.jdbc.Driver
+    url: jdbc:h2:mem:drugsdb
+    #    username: root
+    #    password: vedant
+    driver-class-name: org.h2.Driver
 

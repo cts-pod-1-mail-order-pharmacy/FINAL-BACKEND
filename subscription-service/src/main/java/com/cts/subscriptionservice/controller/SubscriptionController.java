@@ -10,6 +10,7 @@ import com.cts.subscriptionservice.entity.MemberSubscription;
 import com.cts.subscriptionservice.entity.Prescription;
 import com.cts.subscriptionservice.exception.TokenInvalidException;
 import com.cts.subscriptionservice.service.SubscriptionService;
+import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
@@ -19,8 +20,9 @@ import java.util.Date;
 import java.util.List;
 import java.util.Map;
 
+@Slf4j
+@CrossOrigin(origins = "*")
 @RestController
-@RequestMapping("subscription")
 public class SubscriptionController {
     @Autowired
     private SubscriptionService subscriptionService;
@@ -36,10 +38,17 @@ public class SubscriptionController {
     @Autowired
     private RefillClient refillClient;
 
-    @PostMapping("/subscribe/{location}/{refill}")
+    @GetMapping("/")
+    public String dummyAPI(){
+        log.info("In Home!");
+        return "Home";
+    }
+
+    @PostMapping("/subscription/subscribe/{location}/{refill}")
     public String subscribe(@PathVariable String location, @PathVariable String refill, @RequestBody Prescription prescription, @RequestHeader("Authorization") String token) throws TokenInvalidException{
         AuthResponse authResponse = authClient.validate(token);
         if(!authResponse.isValid()){
+            log.info("Invalid!");
             throw new TokenInvalidException(UNAUTHORIZED_USER);
         }
 
@@ -67,36 +76,41 @@ public class SubscriptionController {
         return "Order Subscribed";
     }
 
-    @GetMapping("/getAllSubscriptions/{memberId}")
+    @GetMapping("/subscription/getAllSubscriptions/{memberId}")
     public List<Long> getAllSubsIdOfMember(@PathVariable("memberId") Long memberId, @RequestHeader("Authorization") String token){
         AuthResponse authResponse = authClient.validate(token);
         if(!authResponse.isValid()){
+            log.info("Invalid!");
             throw new TokenInvalidException(UNAUTHORIZED_USER);
         }
         return subscriptionService.getAllSubsIdOfMember(memberId);
     }
 
-    @DeleteMapping("/unsubscribe/{subscription_id}/")
+    @DeleteMapping("/subscription/unsubscribe/{subscription_id}/")
     public ResponseEntity<?> deleteSubscription(@PathVariable("subscription_id") Long subscriptionid,
                                                 @RequestHeader("Authorization") String token) throws TokenInvalidException {
         AuthResponse authResponse = authClient.validate(token);
         if(!authResponse.isValid()){
+            log.info("Invalid!");
             throw new TokenInvalidException(UNAUTHORIZED_USER);
         }
         if (refillClient.anyPendings(subscriptionid, token)) {
+            log.info("dues!");
             return new ResponseEntity<>("you have not yet cleared all the dues", HttpStatus.PAYMENT_REQUIRED);
         }
         subscriptionService.delete(subscriptionid);
         return new ResponseEntity<>(HttpStatus.OK);
     }
 
-    @GetMapping("/getAllDrugs/{subscriptionId}")
+    @GetMapping("/subscription/getAllDrugs/{subscriptionId}")
     public Map<String, Integer> getAllDrugsOfMember(@PathVariable("subscriptionId") Long subscriptionId){
+        log.info("All the subscribed drugs!");
         return subscriptionService.getAllDrugsOfMember(subscriptionId);
     }
 
-    @GetMapping("/getRefillOccurrence/{subscriptionId}")
+    @GetMapping("/subscription/getRefillOccurrence/{subscriptionId}")
     public String findRefillOccurrenceBySubscriptionId(@PathVariable("subscriptionId") Long subscriptionId){
+        log.info("refill by quantity avail!");
         return subscriptionService.findRefillOccurrenceBySubscriptionId(subscriptionId);
     }
 }
